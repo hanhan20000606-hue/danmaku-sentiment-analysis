@@ -258,34 +258,46 @@ add_para('Метаданные анализируемых видео', bold=True
 add_para('')
 
 videos = [
-    ['1', 'BV171Paz2ESZ',
-     'Ai商业慢谈 / Деловые разговоры об AI',
-     'Ai商业慢谈', 'Технологии', '2026-03-15', '8:58', '897', '681'],
-    ['2', 'BV1ojfDBSEPv',
-     '【闪客】一口气拆穿 Skill/MCP/RAG/Agent/OpenClaw 底层逻辑 /\nАнализ архитектуры Skill/MCP/RAG',
-     '闪客', 'Технологии', '2026-02-03', '14:20', '1800', '998'],
-    ['3', 'BV1SvZyBJENz',
-     '山茶爱讲话 / Шанча говорит',
-     '山茶爱讲话', 'Развлечения', '2026-02-17', '5:48', '1161', '1007'],
-    ['4', 'BV1xi6kBFEmZ',
-     '顶级公关？是把人当傻子吧！ /\nВысший PR: неужели людей считают дураками?',
-     '—', 'Развлечения', '2026-01-31', '7:15', '1153', '986'],
-    ['5', 'BV1Mpd5BFEk1',
-     'Upspeed 盛嘉成 / Автомобильные гонки',
-     'Upspeed盛嘉成', 'Автомобили', '2026-04-18', '13:29', '948', '459'],
-    ['6', 'BV1cZXKBpENC',
-     '公路之王挑战赛 / Шоссейный король: челлендж',
-     '—', 'Автомобили', '2026-03-27', '16:42', '2145', '1401'],
+    # №, BV-код, Автор канала, Название видео, Категория, Дата и время, Просмотры, Исх. даньму, После очистки
+    ['1', 'BV1Mpd5BFEk1',
+     'Upspeed盛嘉成 /\nUpspeed Шэн Цзячэн',
+     '公路之王挑战赛 /\nКороль дорог: Челлендж',
+     'Автомобили', '2026-04-18\n18:05', '88,3万', '2053', '—'],
+    ['2', 'BV1cZXKBpENC',
+     '极速拍档-Jacky /\nЦзису Пайдан-Jacky',
+     '这就是人类史上最好开的SUV！ /\nЭто лучший SUV в истории!',
+     'Автомобили', '2026-03-27\n21:00', '73,3万', '2179', '—'],
+    ['3', 'BV171Paz2ESZ',
+     'Ai商业慢谈 /\nДеловые разговоры об AI',
+     '全民养虾, OpenClaw杀疯了！…深扒\n2026 AI全自动代理… /\nAI-агенты 2026: паника и хайп',
+     'Технологии', '2026-03-07\n17:36', '59,3万', '1292', '—'],
+    ['4', 'BV1ojfDBSEPv',
+     '飞天闪客 /\nФэйтянь Шанькэ',
+     '【闪客】一口气拆穿Skill/MCP/RAG/\nAgent/OpenClaw底层逻辑 /\nАнализ архитектуры\nSkill/MCP/RAG/Agent',
+     'Технологии', '2026-02-03\n23:37', '82,3万', '2418', '—'],
+    ['5', 'BV1SvZyBJENz',
+     '山茶爱讲话 /\nШаньча говорит',
+     '作为人类,有点看不懂了？\n【2026春晚乐子杂谈】 /\nНепонятно как человеку?\n[Гала-концерт 2026]',
+     'Развлечения', '2026-02-17\n19:37', '111,9万', '1483', '—'],
+    ['6', 'BV1xi6kBFEmZ',
+     '山茶爱讲话 /\nШаньча говорит',
+     '顶级公关？是把人当傻子吧！ /\nВысший пиар? За дураков\nнас держат?',
+     'Развлечения', '2026-01-31\n09:43', '120,3万', '1492', '—'],
 ]
+
+# Recalculate totals
+total_views = '535,4万'
+total_raw = sum(int(v[7]) for v in videos)  # 2053+2179+1292+2418+1483+1492
+total_cleaned = 6314  # known from thesis
 
 table = doc.add_table(rows=8, cols=9)
 table.style = 'Table Grid'
 table.alignment = WD_TABLE_ALIGNMENT.CENTER
 
-headers = ['№', 'BV-код', 'Название видео', 'Автор канала', 'Категория',
-           'Дата публ.', 'Длит.', 'Исх.\nданьму', 'После\nочистки']
+headers = ['№', 'BV-код', 'Автор канала', 'Название видео', 'Категория',
+           'Дата и\nвремя', 'Просмотры', 'Исх.\nданьму', 'После\nочистки']
 for j, h in enumerate(headers):
-    set_cell_text(table.rows[0].cells[j], h, bold=True, size=9,
+    set_cell_text(table.rows[0].cells[j], h, bold=True, size=8,
                   alignment=WD_ALIGN_PARAGRAPH.CENTER)
 shade_cells(table.rows[0])
 
@@ -293,25 +305,25 @@ for i, vid in enumerate(videos):
     row = table.rows[i + 1]
     for j, val in enumerate(vid):
         alignment = WD_ALIGN_PARAGRAPH.CENTER if j in [0, 4, 5, 6, 7, 8] else WD_ALIGN_PARAGRAPH.LEFT
-        set_cell_text(row.cells[j], val, size=9, alignment=alignment)
+        set_cell_text(row.cells[j], val, size=8, alignment=alignment)
 
 # Total row
 total_row = table.rows[7]
-set_cell_text(total_row.cells[0], '', size=9)
-set_cell_text(total_row.cells[1], '', size=9)
-set_cell_text(total_row.cells[2], '', size=9)
-set_cell_text(total_row.cells[3], '', size=9)
-set_cell_text(total_row.cells[4], 'Итого', bold=True, size=9, alignment=WD_ALIGN_PARAGRAPH.CENTER)
-set_cell_text(total_row.cells[5], '—', size=9, alignment=WD_ALIGN_PARAGRAPH.CENTER)
-set_cell_text(total_row.cells[6], '—', size=9, alignment=WD_ALIGN_PARAGRAPH.CENTER)
-set_cell_text(total_row.cells[7], '8104', bold=True, size=9, alignment=WD_ALIGN_PARAGRAPH.CENTER)
-set_cell_text(total_row.cells[8], '6314', bold=True, size=9, alignment=WD_ALIGN_PARAGRAPH.CENTER)
+for j in range(4):
+    set_cell_text(total_row.cells[j], '', size=8)
+set_cell_text(total_row.cells[4], 'Итого', bold=True, size=8, alignment=WD_ALIGN_PARAGRAPH.CENTER)
+set_cell_text(total_row.cells[5], total_views, bold=True, size=8, alignment=WD_ALIGN_PARAGRAPH.CENTER)
+set_cell_text(total_row.cells[6], '—', size=8, alignment=WD_ALIGN_PARAGRAPH.CENTER)
+set_cell_text(total_row.cells[7], str(total_raw), bold=True, size=8, alignment=WD_ALIGN_PARAGRAPH.CENTER)
+set_cell_text(total_row.cells[8], str(total_cleaned), bold=True, size=8, alignment=WD_ALIGN_PARAGRAPH.CENTER)
 
 add_para('')
 add_para('Примечание — Все видео опубликованы на платформе Bilibili в 2026 году. Даньму собраны '
-         'через открытый API платформы (bilibili-api-python). Период сбора данных: 15–25 апреля 2026 г. '
-         'Длительность указана в формате мин:сек. Исходное количество даньму — до очистки; '
-         'после очистки — количество записей, использованных в анализе.', size=9, italic=True)
+         'через открытый API платформы (bilibili-api-python). Период сбора данных: апрель 2026 г. '
+         'Просмотры указаны на момент сбора данных. Исходное количество даньму — до процедуры '
+         'очистки; «После очистки» — количество записей, использованных в итоговом анализе. '
+         'Знак «—» в столбце «После очистки» означает, что очистка проводилась на всём массиве '
+         'данных, без разделения по отдельным видео.', size=8, italic=True)
 
 # ============================================================
 # ПРИЛОЖЕНИЕ В
@@ -405,6 +417,6 @@ add_para('— statistical_analysis.py: статистическая провер
 add_para('— generate_appendix.py: генерация настоящих приложений (данный скрипт).', size=10)
 
 # Save
-output_path = 'C:/Users/SOLO/WorkBuddy/20260326235845/Приложения_А_Б_В.docx'
+output_path = 'C:/Users/SOLO/WorkBuddy/20260326235845/Приложения_А_Б_В_v2.docx'
 doc.save(output_path)
 print(f'Saved to: {output_path}')
