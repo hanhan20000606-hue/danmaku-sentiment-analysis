@@ -387,6 +387,23 @@ add_para('Примечание — Точность указана для тес
          'что является классическим признаком переобучения. Выбрана эпоха 4 как обеспечивающая '
          'наилучший баланс между качеством классификации и обобщающей способностью модели.', size=9, italic=True)
 
+add_para('')
+add_para('Исходный код и данные', bold=True, size=12)
+add_para('')
+add_para('Исходный код проекта, включая скрипты сбора, очистки, обучения модели и статистического '
+         'анализа, размещён в открытом репозитории GitHub:', size=11)
+add_para('')
+add_para('https://github.com/hanhan20000606-hue/danmaku-sentiment-analysis', bold=True, size=11,
+         alignment=WD_ALIGN_PARAGRAPH.CENTER)
+add_para('')
+add_para('Репозиторий включает следующие файлы:', size=11)
+add_para('— fetch_danmaku_v3.py: сбор даньму через API Bilibili;', size=10)
+add_para('— clean_danmaku.py: очистка и предобработка даньму;', size=10)
+add_para('— generate_labels.py: генерация выборки для ручной аннотации;', size=10)
+add_para('— finetune_predict.py: тонкая настройка Chinese-BERT-wwm и прогнозирование;', size=10)
+add_para('— statistical_analysis.py: статистическая проверка гипотез и визуализация;', size=10)
+add_para('— generate_appendix.py: генерация настоящих приложений (данный скрипт).', size=10)
+
 # Save
 output_path = 'C:/Users/SOLO/WorkBuddy/20260326235845/Приложения_А_Б_В.docx'
 doc.save(output_path)
