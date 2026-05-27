@@ -10,10 +10,14 @@ HEADERS = {
     'Referer': 'https://www.bilibili.com',
 }
 
-# 需要补充采集的视频
+# 6个采集视频（2026年4月采集，实际采集量因B站API限制低于平台总量）
 VIDEOS = [
-    {'bvid': 'BV171Paz2ESZ', 'category': '科技', 'cid': 36523673864, 'expected': 1292},
-    {'bvid': 'BV1SvZyBJENz', 'category': '娱乐', 'cid': 25965760762, 'expected': 1481},
+    {'bvid': 'BV171Paz2ESZ', 'category': '科技',   'author': 'Ai商业慢谈',        'cid': 36523673864, 'expected': 897,  'title': '全民养虾，OpenClaw杀疯了！GPT-5.4降维突袭！丨深扒2026 AI全自动代理'},
+    {'bvid': 'BV1ojfDBSEPv', 'category': '科技',   'author': '飞天闪客',           'cid': 35800812006, 'expected': 1800, 'title': '【闪客】名词诈骗！一口气拆穿Skill/MCP/RAG/Agent/OpenClaw底层逻辑'},
+    {'bvid': 'BV1SvZyBJENz', 'category': '娱乐',   'author': '山茶爱讲话',         'cid': 25965760762, 'expected': 1161, 'title': '作为人类，有点看不懂了？【2026春晚乐子杂谈】'},
+    {'bvid': 'BV1xi6kBFEmZ', 'category': '娱乐',   'author': '山茶爱讲话',         'cid': 25955278054, 'expected': 1153, 'title': '顶级公关？是把人当傻子吧！'},
+    {'bvid': 'BV1Mpd5BFEk1', 'category': '汽车',   'author': 'Upspeed盛嘉成',      'cid': 37580377631, 'expected': 948,  'title': '公路之王挑战赛，保时捷真的不可战胜吗？'},
+    {'bvid': 'BV1cZXKBpENC', 'category': '汽车',   'author': '极速拍档-Jacky',     'cid': 37019320808, 'expected': 2145, 'title': '这就是人类史上最好开的SUV！'},
 ]
 
 def fetch_xml_danmaku(oid, retries=5):
